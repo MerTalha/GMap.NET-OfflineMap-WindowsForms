@@ -31,7 +31,7 @@ namespace WindowsFormsApp2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.CacheOnly;
             gMapControl1.Dock= DockStyle.Fill;
             gMapControl1.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
             gMapControl1.Position = new PointLatLng(39.92390734605342, 32.826400220064734);
@@ -51,7 +51,7 @@ namespace WindowsFormsApp2
 
             if (!area.IsEmpty)
             {
-                for (int i = (int)gMapControl1.Zoom; i <= gMapControl1.MaxZoom; i++)
+                for (int i = (int)gMapControl1.Zoom; i <= 16; i++)
                 {
                     GMap.NET.TilePrefetcher obj = new GMap.NET.TilePrefetcher();
                     obj.Icon = this.Icon;
