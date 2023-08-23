@@ -12,12 +12,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
+using GMapMarker = GMap.NET.WindowsForms.GMapMarker;
 
 namespace WindowsFormsApp2
 {
     public partial class Form1 : Form
     {
         GMapOverlay markers = new GMapOverlay("markers");
+
+        List<PointLatLng> markerKoordinatlari = new List<PointLatLng>();
+
+        GMarkerGoogle marker;
 
         public Form1()
         {
@@ -37,7 +42,7 @@ namespace WindowsFormsApp2
             gMapControl1.Zoom = 1;
             gMapControl1.IgnoreMarkerOnMouseWheel = true;
 
-
+            
         }
 
 
@@ -66,12 +71,37 @@ namespace WindowsFormsApp2
         }
         private void GMapControl1_MouseDown(object sender, MouseEventArgs e)
         {
-            double X = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lng;
-            double Y = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
+            if (e.Button == MouseButtons.Left)  // Sadece sol tuş tıklamasını kontrol ediyoruz
+            {
+                double X = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lng;
+                double Y = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
 
-            GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(Y, X), GMarkerGoogleType.green);
-            markers.Markers.Add(marker);
-            gMapControl1.Overlays.Add(markers);
+                marker = new GMarkerGoogle(new PointLatLng(Y, X), GMarkerGoogleType.green);
+                markers.Markers.Add(marker);
+
+                // Yeni marker eklendikten sonra koordinatları temizle
+                markerKoordinatlari.Clear();
+
+                // Tüm markerları tekrar ekleyerek koordinatları güncelle
+                foreach (GMapMarker existingMarker in markers.Markers)
+                {
+                    markerKoordinatlari.Add(existingMarker.Position);
+                }
+
+                // Marker koordinatlarını yazdır
+                foreach (PointLatLng koordinat in markerKoordinatlari)
+                {
+                    Console.WriteLine("Latitude: " + koordinat.Lat + ", Longitude: " + koordinat.Lng);
+                }
+                Console.WriteLine("-----------------------------");
+
+                // Markers koleksiyonunu güncellediğiniz için Overlay'ı güncelleyin
+                gMapControl1.Overlays.Clear();
+                gMapControl1.Overlays.Add(markers);
+            }
         }
+
+
+
     }
 }
