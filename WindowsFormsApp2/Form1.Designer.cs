@@ -59,6 +59,7 @@
             this.gMapControl1.Size = new System.Drawing.Size(538, 377);
             this.gMapControl1.TabIndex = 0;
             this.gMapControl1.Zoom = 0D;
+            this.gMapControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GMapControl1_MouseDown);
             // 
             // button1
             // 

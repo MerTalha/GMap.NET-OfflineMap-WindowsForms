@@ -1,5 +1,6 @@
 ﻿using GMap.NET;
 using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
 using GMap.NET.WindowsPresentation;
 using System;
 using System.Collections.Generic;
@@ -16,22 +17,18 @@ namespace WindowsFormsApp2
 {
     public partial class Form1 : Form
     {
+        GMapOverlay markers = new GMapOverlay("markers");
+
         public Form1()
         {
             InitializeComponent();
-            /*gmap.MapProvider = GMap.NET.MapProviders.GMapProviders.GoogleMap;
-            gmap.Dock = DockStyle.Fill;
-            gmap.MapProvider = GMap.NET.MapProviders.BingMapProvider.Instance;
-            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
-            gmap.ShowCenter = false;
-            gmap.MinZoom = 1;
-            gmap.MaxZoom = 20;*/
+
 
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.CacheOnly;
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
             gMapControl1.Dock= DockStyle.Fill;
             gMapControl1.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
             gMapControl1.Position = new PointLatLng(39.92390734605342, 32.826400220064734);
@@ -66,6 +63,15 @@ namespace WindowsFormsApp2
             {
                 System.Windows.MessageBox.Show("No Area Chosen", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        private void GMapControl1_MouseDown(object sender, MouseEventArgs e)
+        {
+            double X = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lng;
+            double Y = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
+
+            GMarkerGoogle marker = new GMarkerGoogle(new PointLatLng(Y, X), GMarkerGoogleType.green);
+            markers.Markers.Add(marker);
+            gMapControl1.Overlays.Add(markers);
         }
     }
 }
