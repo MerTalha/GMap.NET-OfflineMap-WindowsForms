@@ -56,46 +56,58 @@
             this.gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMapControl1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapControl1.ShowTileGridLines = false;
-            this.gMapControl1.Size = new System.Drawing.Size(538, 377);
+            this.gMapControl1.Size = new System.Drawing.Size(1397, 700);
             this.gMapControl1.TabIndex = 0;
             this.gMapControl1.Zoom = 0D;
             this.gMapControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GMapControl1_MouseDown);
             // 
             // btnDownload
             // 
+            this.btnDownload.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnDownload.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDownload.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnDownload.ForeColor = System.Drawing.Color.Silver;
             this.btnDownload.Location = new System.Drawing.Point(35, 61);
             this.btnDownload.Name = "btnDownload";
-            this.btnDownload.Size = new System.Drawing.Size(86, 23);
+            this.btnDownload.Size = new System.Drawing.Size(120, 50);
             this.btnDownload.TabIndex = 1;
             this.btnDownload.Text = "Download";
-            this.btnDownload.UseVisualStyleBackColor = true;
+            this.btnDownload.UseVisualStyleBackColor = false;
             this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(35, 115);
+            this.btnClear.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnClear.ForeColor = System.Drawing.Color.Silver;
+            this.btnClear.Location = new System.Drawing.Point(35, 131);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(86, 23);
+            this.btnClear.Size = new System.Drawing.Size(120, 50);
             this.btnClear.TabIndex = 2;
             this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnClearAll
             // 
-            this.btnClearAll.Location = new System.Drawing.Point(35, 172);
+            this.btnClearAll.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnClearAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnClearAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnClearAll.ForeColor = System.Drawing.Color.Silver;
+            this.btnClearAll.Location = new System.Drawing.Point(35, 201);
             this.btnClearAll.Name = "btnClearAll";
-            this.btnClearAll.Size = new System.Drawing.Size(86, 23);
+            this.btnClearAll.Size = new System.Drawing.Size(120, 50);
             this.btnClearAll.TabIndex = 3;
             this.btnClearAll.Text = "Clear All";
-            this.btnClearAll.UseVisualStyleBackColor = true;
+            this.btnClearAll.UseVisualStyleBackColor = false;
             this.btnClearAll.Click += new System.EventHandler(this.btnClearAll_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1782, 903);
             this.Controls.Add(this.btnClearAll);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnDownload);
