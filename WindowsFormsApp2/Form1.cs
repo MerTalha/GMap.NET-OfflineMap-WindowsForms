@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using GMapMarker = GMap.NET.WindowsForms.GMapMarker;
+using GMapRoute = GMap.NET.WindowsForms.GMapRoute;
 
 namespace WindowsFormsApp2
 {
@@ -23,6 +24,12 @@ namespace WindowsFormsApp2
         List<PointLatLng> markerKoordinatlari = new List<PointLatLng>();
 
         GMarkerGoogle marker;
+
+        private GMapRoute route;
+
+        private GMapOverlay routeOverlay = new GMapOverlay("routeOverlay"); // Route overlay'i
+
+
 
         public Form1()
         {
@@ -98,6 +105,18 @@ namespace WindowsFormsApp2
                 // Markers koleksiyonunu güncellediğiniz için Overlay'ı güncelleyin
                 gMapControl1.Overlays.Clear();
                 gMapControl1.Overlays.Add(markers);
+
+                // Eklenen markerlar arasında polyline çiz
+                routeOverlay.Clear();
+                if (markerKoordinatlari.Count >= 2)
+                {
+                    List<PointLatLng> tempKoordinatlari = new List<PointLatLng>(markerKoordinatlari);
+                    GMapRoute newRoute = new GMapRoute(tempKoordinatlari, "Route");
+                    routeOverlay.Routes.Add(newRoute);
+                }
+
+                // routeOverlay'i güncelleyin
+                gMapControl1.Overlays.Add(routeOverlay);
             }
         }
 
