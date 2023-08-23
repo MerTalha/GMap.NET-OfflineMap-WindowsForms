@@ -25,19 +25,21 @@ namespace WindowsFormsApp2
 
         GMarkerGoogle marker;
 
-        private GMapOverlay routeOverlay = new GMapOverlay("routeOverlay"); // Route overlay'i
+        private GMapOverlay routeOverlay = new GMapOverlay("routeOverlay");
+
+        PointLatLng dragStartPoint;
+        bool isDragging = false;
 
 
         public Form1()
         {
             InitializeComponent();
 
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.CacheOnly;
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
             gMapControl1.Dock = DockStyle.Fill;
             gMapControl1.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
             gMapControl1.Position = new PointLatLng(39.92390734605342, 32.826400220064734);
@@ -73,28 +75,27 @@ namespace WindowsFormsApp2
 
         private void GMapControl1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)  // Sadece sol tuş tıklamasını kontrol ediyoruz
+            if (e.Button == MouseButtons.Left)  
             {
                 double X = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lng;
                 double Y = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
 
                 marker = new GMarkerGoogle(new PointLatLng(Y, X), GMarkerGoogleType.green);
 
-                // Yeni marker eklendikten sonra koordinatları temizle
+                // Clear coordinates after adding a new marker
                 markerCoordinates.Clear();
 
-                // Markers koleksiyonunu güncellediğiniz için Overlay'ı güncelleyin
+                // Clear overlays and add markers collection
                 gMapControl1.Overlays.Clear();
                 gMapControl1.Overlays.Add(markers);
                 markers.Markers.Add(marker);
 
-                // Tüm markerları tekrar ekleyerek koordinatları güncelle
+                // Update marker coordinates
                 foreach (GMapMarker existingMarker in markers.Markers)
                 {
                     markerCoordinates.Add(existingMarker.Position);
                 }
 
-                // Marker koordinatlarını yazdır
                 foreach (PointLatLng koordinat in markerCoordinates)
                 {
                     Console.WriteLine("Latitude: " + koordinat.Lat + ", Longitude: " + koordinat.Lng);
@@ -102,7 +103,7 @@ namespace WindowsFormsApp2
                 Console.WriteLine("-----------------------------");
 
 
-                // Eklenen markerlar arasında polyline çiz
+                // Draw polyline between added markers
                 routeOverlay.Clear();
                 if (markerCoordinates.Count >= 2)
                 {
@@ -111,7 +112,6 @@ namespace WindowsFormsApp2
                     routeOverlay.Routes.Add(newRoute);
                 }
 
-                // routeOverlay'i güncelleyin
                 gMapControl1.Overlays.Add(routeOverlay);
             }
         }
@@ -120,14 +120,14 @@ namespace WindowsFormsApp2
         {
             if (markers.Markers.Count > 0)
             {
-                markers.Markers.RemoveAt(markers.Markers.Count - 1); // Son markerı kaldırın
+                markers.Markers.RemoveAt(markers.Markers.Count - 1); // Remove the last marker
 
-                markerCoordinates.RemoveAt(markerCoordinates.Count - 1); // Koordinatları güncelleyin
+                markerCoordinates.RemoveAt(markerCoordinates.Count - 1); // Update coordinates
 
                 gMapControl1.Overlays.Clear();
                 gMapControl1.Overlays.Add(markers);
 
-                routeOverlay.Clear(); // Polyline'ları temizleyin
+                routeOverlay.Clear(); // Clear polylines
 
                 if (markerCoordinates.Count >= 2)
                 {
@@ -135,7 +135,7 @@ namespace WindowsFormsApp2
                     routeOverlay.Routes.Add(newRoute);
                 }
 
-                gMapControl1.Overlays.Add(routeOverlay); // Overlay'i güncelleyin
+                gMapControl1.Overlays.Add(routeOverlay); 
             }
         }
 
