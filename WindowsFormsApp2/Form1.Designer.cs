@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnDownload = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnClearAll = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // gMapControl1
@@ -61,42 +61,44 @@
             this.gMapControl1.Zoom = 0D;
             this.gMapControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GMapControl1_MouseDown);
             // 
-            // button1
+            // btnDownload
             // 
-            this.button1.Location = new System.Drawing.Point(35, 61);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnDownload.Location = new System.Drawing.Point(35, 61);
+            this.btnDownload.Name = "btnDownload";
+            this.btnDownload.Size = new System.Drawing.Size(86, 23);
+            this.btnDownload.TabIndex = 1;
+            this.btnDownload.Text = "Download";
+            this.btnDownload.UseVisualStyleBackColor = true;
+            this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
-            // button2
+            // btnClear
             // 
-            this.button2.Location = new System.Drawing.Point(35, 115);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnClear.Location = new System.Drawing.Point(35, 115);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(86, 23);
+            this.btnClear.TabIndex = 2;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // button3
+            // btnClearAll
             // 
-            this.button3.Location = new System.Drawing.Point(35, 172);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnClearAll.Location = new System.Drawing.Point(35, 172);
+            this.btnClearAll.Name = "btnClearAll";
+            this.btnClearAll.Size = new System.Drawing.Size(86, 23);
+            this.btnClearAll.TabIndex = 3;
+            this.btnClearAll.Text = "Clear All";
+            this.btnClearAll.UseVisualStyleBackColor = true;
+            this.btnClearAll.Click += new System.EventHandler(this.btnClearAll_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnClearAll);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.btnDownload);
             this.Controls.Add(this.gMapControl1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -108,9 +110,9 @@
         #endregion
 
         private GMap.NET.WindowsForms.GMapControl gMapControl1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnDownload;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnClearAll;
     }
 }
 

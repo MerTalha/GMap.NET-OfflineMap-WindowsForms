@@ -25,10 +25,7 @@ namespace WindowsFormsApp2
 
         GMarkerGoogle marker;
 
-        private GMapRoute route;
-
         private GMapOverlay routeOverlay = new GMapOverlay("routeOverlay"); // Route overlay'i
-
 
 
         public Form1()
@@ -41,7 +38,7 @@ namespace WindowsFormsApp2
         private void Form1_Load(object sender, EventArgs e)
         {
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
-            gMapControl1.Dock= DockStyle.Fill;
+            gMapControl1.Dock = DockStyle.Fill;
             gMapControl1.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
             gMapControl1.Position = new PointLatLng(39.92390734605342, 32.826400220064734);
             gMapControl1.MinZoom = 0;
@@ -49,12 +46,9 @@ namespace WindowsFormsApp2
             gMapControl1.Zoom = 1;
             gMapControl1.IgnoreMarkerOnMouseWheel = true;
 
-            
         }
 
-
-
-        private void button1_Click(object sender, EventArgs e)
+        private void btnDownload_Click(object sender, EventArgs e)
         {
             RectLatLng area = gMapControl1.SelectedArea;
 
@@ -76,6 +70,7 @@ namespace WindowsFormsApp2
                 System.Windows.MessageBox.Show("No Area Chosen", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
         private void GMapControl1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)  // Sadece sol tuş tıklamasını kontrol ediyoruz
@@ -84,10 +79,14 @@ namespace WindowsFormsApp2
                 double Y = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
 
                 marker = new GMarkerGoogle(new PointLatLng(Y, X), GMarkerGoogleType.green);
-                markers.Markers.Add(marker);
 
                 // Yeni marker eklendikten sonra koordinatları temizle
                 markerKoordinatlari.Clear();
+
+                // Markers koleksiyonunu güncellediğiniz için Overlay'ı güncelleyin
+                gMapControl1.Overlays.Clear();
+                gMapControl1.Overlays.Add(markers);
+                markers.Markers.Add(marker);
 
                 // Tüm markerları tekrar ekleyerek koordinatları güncelle
                 foreach (GMapMarker existingMarker in markers.Markers)
@@ -102,9 +101,6 @@ namespace WindowsFormsApp2
                 }
                 Console.WriteLine("-----------------------------");
 
-                // Markers koleksiyonunu güncellediğiniz için Overlay'ı güncelleyin
-                gMapControl1.Overlays.Clear();
-                gMapControl1.Overlays.Add(markers);
 
                 // Eklenen markerlar arasında polyline çiz
                 routeOverlay.Clear();
@@ -120,7 +116,39 @@ namespace WindowsFormsApp2
             }
         }
 
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            if (markers.Markers.Count > 0)
+            {
+                markers.Markers.RemoveAt(markers.Markers.Count - 1); // Son markerı kaldırın
 
+                markerKoordinatlari.RemoveAt(markerKoordinatlari.Count - 1); // Koordinatları güncelleyin
 
+                gMapControl1.Overlays.Clear();
+                gMapControl1.Overlays.Add(markers);
+
+                routeOverlay.Clear(); // Polyline'ları temizleyin
+
+                if (markerKoordinatlari.Count >= 2)
+                {
+                    GMapRoute newRoute = new GMapRoute(markerKoordinatlari, "Route");
+                    routeOverlay.Routes.Add(newRoute);
+                }
+
+                gMapControl1.Overlays.Add(routeOverlay); // Overlay'i güncelleyin
+            }
+        }
+
+        private void btnClearAll_Click(object sender, EventArgs e)
+        {
+            markers.Markers.Clear(); // Tüm markerları temizleyin
+            markerKoordinatlari.Clear(); // Koordinatları temizleyin
+
+            gMapControl1.Overlays.Clear(); // Tüm overlay'ları temizleyin
+
+            routeOverlay.Routes.Clear(); // Tüm polyline'ları temizleyin
+
+            gMapControl1.Refresh(); // Haritayı yenileyin
+        }
     }
 }
