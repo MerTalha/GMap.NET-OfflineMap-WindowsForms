@@ -56,7 +56,7 @@ namespace WindowsFormsApp2
 
             if (!area.IsEmpty)
             {
-                for (int i = (int)gMapControl1.Zoom; i <= 16; i++)
+                for (int i = (int)gMapControl1.Zoom; i <= 15; i++)
                 {
                     GMap.NET.TilePrefetcher obj = new GMap.NET.TilePrefetcher();
                     obj.Icon = this.Icon;
@@ -65,7 +65,7 @@ namespace WindowsFormsApp2
                     obj.Start(area, i, gMapControl1.MapProvider, 100, 1);
                 }
 
-                Close();
+                //Close();
             }
             else
             {
