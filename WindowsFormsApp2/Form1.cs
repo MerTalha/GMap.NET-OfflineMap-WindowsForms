@@ -48,7 +48,7 @@ namespace WindowsFormsApp2
             gMapControl1.MaxZoom = 24;
             gMapControl1.Zoom = 1;
             gMapControl1.IgnoreMarkerOnMouseWheel = true;
-
+            
         }
 
         private void btnDownload_Click(object sender, EventArgs e)
@@ -118,7 +118,7 @@ namespace WindowsFormsApp2
                     dragStartPoint = marker.Position;
                     isDragging = true;
                     draggedMarker = marker;
-
+                    
                     gMapControl1.Overlays.Add(routeOverlay);
                 }
             }
@@ -228,7 +228,7 @@ namespace WindowsFormsApp2
         private void btnGoogleMap_Click(object sender, EventArgs e)
         {
             gMapControl1.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
-            isMarker =false;
+            //isMarker =false;
         }
 
         private void btnBingMap_Click(object sender, EventArgs e)
