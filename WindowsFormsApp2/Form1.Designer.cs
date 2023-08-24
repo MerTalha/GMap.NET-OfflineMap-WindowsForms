@@ -32,6 +32,8 @@
             this.btnDownload = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnClearAll = new System.Windows.Forms.Button();
+            this.btnGoogleMap = new System.Windows.Forms.Button();
+            this.btnBingMap = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // gMapControl1
@@ -69,7 +71,7 @@
             this.btnDownload.ForeColor = System.Drawing.Color.Silver;
             this.btnDownload.Location = new System.Drawing.Point(35, 61);
             this.btnDownload.Name = "btnDownload";
-            this.btnDownload.Size = new System.Drawing.Size(120, 50);
+            this.btnDownload.Size = new System.Drawing.Size(150, 50);
             this.btnDownload.TabIndex = 1;
             this.btnDownload.Text = "Download";
             this.btnDownload.UseVisualStyleBackColor = false;
@@ -83,7 +85,7 @@
             this.btnClear.ForeColor = System.Drawing.Color.Silver;
             this.btnClear.Location = new System.Drawing.Point(35, 131);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(120, 50);
+            this.btnClear.Size = new System.Drawing.Size(150, 50);
             this.btnClear.TabIndex = 2;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = false;
@@ -97,17 +99,47 @@
             this.btnClearAll.ForeColor = System.Drawing.Color.Silver;
             this.btnClearAll.Location = new System.Drawing.Point(35, 201);
             this.btnClearAll.Name = "btnClearAll";
-            this.btnClearAll.Size = new System.Drawing.Size(120, 50);
+            this.btnClearAll.Size = new System.Drawing.Size(150, 50);
             this.btnClearAll.TabIndex = 3;
             this.btnClearAll.Text = "Clear All";
             this.btnClearAll.UseVisualStyleBackColor = false;
             this.btnClearAll.Click += new System.EventHandler(this.btnClearAll_Click);
+            // 
+            // btnGoogleMap
+            // 
+            this.btnGoogleMap.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnGoogleMap.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnGoogleMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnGoogleMap.ForeColor = System.Drawing.Color.Silver;
+            this.btnGoogleMap.Location = new System.Drawing.Point(35, 278);
+            this.btnGoogleMap.Name = "btnGoogleMap";
+            this.btnGoogleMap.Size = new System.Drawing.Size(150, 50);
+            this.btnGoogleMap.TabIndex = 4;
+            this.btnGoogleMap.Text = "Google Map";
+            this.btnGoogleMap.UseVisualStyleBackColor = false;
+            this.btnGoogleMap.Click += new System.EventHandler(this.btnGoogleMap_Click);
+            // 
+            // btnBingMap
+            // 
+            this.btnBingMap.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnBingMap.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBingMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnBingMap.ForeColor = System.Drawing.Color.Silver;
+            this.btnBingMap.Location = new System.Drawing.Point(35, 351);
+            this.btnBingMap.Name = "btnBingMap";
+            this.btnBingMap.Size = new System.Drawing.Size(150, 50);
+            this.btnBingMap.TabIndex = 5;
+            this.btnBingMap.Text = "Bing Hybrid";
+            this.btnBingMap.UseVisualStyleBackColor = false;
+            this.btnBingMap.Click += new System.EventHandler(this.btnBingMap_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1782, 903);
+            this.Controls.Add(this.btnBingMap);
+            this.Controls.Add(this.btnGoogleMap);
             this.Controls.Add(this.btnClearAll);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnDownload);
@@ -125,6 +157,8 @@
         private System.Windows.Forms.Button btnDownload;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnClearAll;
+        private System.Windows.Forms.Button btnGoogleMap;
+        private System.Windows.Forms.Button btnBingMap;
     }
 }
 

@@ -1,15 +1,9 @@
 ﻿using GMap.NET;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
-using GMap.NET.WindowsPresentation;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using GMapMarker = GMap.NET.WindowsForms.GMapMarker;
@@ -27,8 +21,9 @@ namespace WindowsFormsApp2
 
         private GMapOverlay routeOverlay = new GMapOverlay("routeOverlay");
 
-        PointLatLng dragStartPoint;
-        bool isDragging = false;
+        private GMarkerGoogle draggedMarker = null;
+        private PointLatLng dragStartPoint;
+        private bool isDragging = false;
 
 
         public Form1()
@@ -41,7 +36,6 @@ namespace WindowsFormsApp2
         {
             GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
             gMapControl1.Dock = DockStyle.Fill;
-            gMapControl1.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
             gMapControl1.Position = new PointLatLng(39.92390734605342, 32.826400220064734);
             gMapControl1.MinZoom = 0;
             gMapControl1.MaxZoom = 24;
@@ -75,7 +69,7 @@ namespace WindowsFormsApp2
 
         private void GMapControl1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)  
+            if (e.Button == MouseButtons.Left)
             {
                 double X = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lng;
                 double Y = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
@@ -135,21 +129,32 @@ namespace WindowsFormsApp2
                     routeOverlay.Routes.Add(newRoute);
                 }
 
-                gMapControl1.Overlays.Add(routeOverlay); 
+                gMapControl1.Overlays.Add(routeOverlay);
             }
         }
 
         //Clear All Markers And Polylines
         private void btnClearAll_Click(object sender, EventArgs e)
         {
-            markers.Markers.Clear(); 
-            markerCoordinates.Clear(); 
+            markers.Markers.Clear();
+            markerCoordinates.Clear();
+            gMapControl1.Overlays.Clear();
 
-            gMapControl1.Overlays.Clear(); 
+            routeOverlay.Routes.Clear();
 
-            routeOverlay.Routes.Clear(); 
+            gMapControl1.Refresh();
+        }
 
-            gMapControl1.Refresh(); 
+        private void btnGoogleMap_Click(object sender, EventArgs e)
+        {
+            gMapControl1.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
+
+        }
+
+        private void btnBingMap_Click(object sender, EventArgs e)
+        {
+            gMapControl1.MapProvider = GMap.NET.MapProviders.BingHybridMapProvider.Instance;
+
         }
     }
 }
