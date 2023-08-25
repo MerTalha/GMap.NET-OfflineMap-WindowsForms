@@ -1,6 +1,7 @@
 ﻿using GMap.NET;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
+using GMap.NET.WindowsPresentation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Windows;
 using System.Windows.Forms;
 using GMapMarker = GMap.NET.WindowsForms.GMapMarker;
 using GMapRoute = GMap.NET.WindowsForms.GMapRoute;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace WindowsFormsApp2
 {
@@ -121,23 +123,33 @@ namespace WindowsFormsApp2
                     
                     gMapControl1.Overlays.Add(routeOverlay);
                 }
+                
             }
+
+            
+            
         }
 
+        GMapMarker gMapMarker = null;
         private void GMapControl1_OnMarkerClick(GMapMarker item, MouseEventArgs e)
         {
             if (!isDragging && (DateTime.Now - mouseDownTime).TotalMilliseconds > dragThreshold)
             {
+                gMapMarker = item;
                 isDragging = true;
                 draggedMarker = item;
-                dragStartPoint = gMapControl1.FromLocalToLatLng(e.X, e.Y);
+                dragStartPoint = item.Position;
                 Cursor = Cursors.SizeAll;
+                //PointLatLng pointLatLng = new PointLatLng(40,40);
+                //item.Position = (pointLatLng);
+                //MessageBox.Show("a" + item.Position);
+
             }
         }
 
         private void GMapControl1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isDragging && draggedMarker != null)
+            /*if (isDragging && draggedMarker != null)
             {
                 PointLatLng newLatLng = gMapControl1.FromLocalToLatLng(e.X, e.Y);
 
@@ -149,6 +161,25 @@ namespace WindowsFormsApp2
                 dragStartPoint = newLatLng;
 
                 UpdateRoute();
+            }*/
+
+            if (isDragging && gMapMarker != null)
+            {
+                if (e.Button == MouseButtons.Left )
+                {
+                    double X = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lng;
+                    double Y = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
+
+                    isDragging = false;
+                    draggedMarker = gMapMarker;
+                    dragStartPoint = gMapMarker.Position;
+                    Cursor = Cursors.SizeAll;
+                    PointLatLng pointLatLng = new PointLatLng(X, Y);
+                    gMapMarker.Position = (pointLatLng);
+
+                    gMapMarker.Position = (pointLatLng);
+
+                }
             }
         }
 
@@ -228,13 +259,13 @@ namespace WindowsFormsApp2
         private void btnGoogleMap_Click(object sender, EventArgs e)
         {
             gMapControl1.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
-            //isMarker =false;
+            isMarker =false;
         }
 
         private void btnBingMap_Click(object sender, EventArgs e)
         {
-            gMapControl1.MapProvider = GMap.NET.MapProviders.BingHybridMapProvider.Instance;
-
+            //gMapControl1.MapProvider = GMap.NET.MapProviders.BingHybridMapProvider.Instance;
+            isMarker =true;
         }
     }
 }
