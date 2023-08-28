@@ -50,7 +50,7 @@ namespace WindowsFormsApp2
             gMapControl1.MaxZoom = 24;
             gMapControl1.Zoom = 1;
             gMapControl1.IgnoreMarkerOnMouseWheel = true;
-            
+
         }
 
         private void btnDownload_Click(object sender, EventArgs e)
@@ -120,14 +120,14 @@ namespace WindowsFormsApp2
                     dragStartPoint = marker.Position;
                     isDragging = true;
                     draggedMarker = marker;
-                    
+
                     gMapControl1.Overlays.Add(routeOverlay);
                 }
-                
+
             }
 
-            
-            
+
+
         }
 
         GMapMarker gMapMarker = null;
@@ -149,7 +149,7 @@ namespace WindowsFormsApp2
 
         private void GMapControl1_MouseMove(object sender, MouseEventArgs e)
         {
-            /*if (isDragging && draggedMarker != null)
+            if (isDragging && draggedMarker != null)
             {
                 PointLatLng newLatLng = gMapControl1.FromLocalToLatLng(e.X, e.Y);
 
@@ -161,11 +161,11 @@ namespace WindowsFormsApp2
                 dragStartPoint = newLatLng;
 
                 UpdateRoute();
-            }*/
+            }
 
-            if (isDragging && gMapMarker != null)
+            /*if (isDragging && gMapMarker != null)
             {
-                if (e.Button == MouseButtons.Left )
+                if (e.Button == MouseButtons.Left)
                 {
                     double X = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lng;
                     double Y = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
@@ -180,7 +180,7 @@ namespace WindowsFormsApp2
                     gMapMarker.Position = (pointLatLng);
 
                 }
-            }
+            }*/
         }
 
         private void GMapControl1_MouseUp(object sender, MouseEventArgs e)
@@ -259,13 +259,13 @@ namespace WindowsFormsApp2
         private void btnGoogleMap_Click(object sender, EventArgs e)
         {
             gMapControl1.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
-            isMarker =false;
+            isMarker = false;
         }
 
         private void btnBingMap_Click(object sender, EventArgs e)
         {
             //gMapControl1.MapProvider = GMap.NET.MapProviders.BingHybridMapProvider.Instance;
-            isMarker =true;
+            isMarker = true;
         }
     }
 }
