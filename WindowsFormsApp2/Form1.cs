@@ -108,23 +108,21 @@ namespace WindowsFormsApp2
                     Console.WriteLine("-----------------------------");
 
 
-                    
-                }
+                    // Draw polyline between added markers
+                    routeOverlay.Clear();
+                    if (markerCoordinates.Count >= 2)
+                    {
+                        List<PointLatLng> tempKoordinatlari = new List<PointLatLng>(markerCoordinates);
+                        GMapRoute newRoute = new GMapRoute(tempKoordinatlari, "Route");
+                        routeOverlay.Routes.Add(newRoute);
+                    }
+                    mouseDownTime = DateTime.Now;
+                    dragStartPoint = marker.Position;
+                    isDragging = true;
+                    draggedMarker = marker;
 
-                // Draw polyline between added markers
-                routeOverlay.Clear();
-                if (markerCoordinates.Count >= 2)
-                {
-                    List<PointLatLng> tempKoordinatlari = new List<PointLatLng>(markerCoordinates);
-                    GMapRoute newRoute = new GMapRoute(tempKoordinatlari, "Route");
-                    routeOverlay.Routes.Add(newRoute);
+                    gMapControl1.Overlays.Add(routeOverlay);
                 }
-                mouseDownTime = DateTime.Now;
-                dragStartPoint = marker.Position;
-                isDragging = true;
-                draggedMarker = marker;
-
-                gMapControl1.Overlays.Add(routeOverlay);
 
             }
 
@@ -132,12 +130,10 @@ namespace WindowsFormsApp2
 
         }
 
-        //GMapMarker gMapMarker = null;
         private void GMapControl1_OnMarkerClick(GMapMarker item, MouseEventArgs e)
         {
             if (!isDragging && (DateTime.Now - mouseDownTime).TotalMilliseconds > dragThreshold)
             {
-                //gMapMarker = item;
                 isDragging = true;
                 draggedMarker = item;
                 dragStartPoint = item.Position;
