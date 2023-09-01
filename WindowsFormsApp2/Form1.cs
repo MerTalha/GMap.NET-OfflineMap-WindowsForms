@@ -19,7 +19,7 @@ namespace WindowsFormsApp2
 
         List<PointLatLng> markerCoordinates = new List<PointLatLng>();
 
-        GMarkerGoogle marker;
+        GMapMarker marker;
 
         private GMapOverlay routeOverlay = new GMapOverlay("routeOverlay");
 
@@ -31,6 +31,8 @@ namespace WindowsFormsApp2
 
         private DateTime mouseDownTime;
         private const int dragThreshold = 200;
+
+
 
 
 
@@ -160,6 +162,10 @@ namespace WindowsFormsApp2
 
                 UpdateRoute();
             }
+
+
+
+
 
             /*if (isDragging && gMapMarker != null)
             {
